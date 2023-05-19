@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Biodata</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="login-box">
+        <p>Biodata</p>
+        <form action="http://localhost:8080/api/views/biodata" method="POST">
+          <div class="user-box">
+            <input
+              required=""
+              name="nama"
+              type="text"
+              oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Nama</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="tmpLahir"
+              type="text"
+              oninvalid="this.setCustomValidity('Tempat Lahir Tidak Boleh Kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Tempat Lahir</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="tglLahir"
+              type="text"
+              oninvalid="this.setCustomValidity('Tangal Lahir Tidak Boleh Kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Tanggal Lahir</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="alamat"
+              type="text"
+              oninvalid="this.setCustomValidity('Alamat tidak boleh kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Alamat</label>
+          </div>
+          <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <button type="submit">Simpan Data</button>
+          </a>
+        </form>
+      </div>
+      <div class="list-biodata">
+         <div class="card-list">
+            <div class="card">
+               <h4>Biodata 1</h4>
+               <div class="card-body">
+                  <p>Nama: Hikma Nelda</p>
+                  <p>Tempat Lahir: Semurup</p>
+                  <p>Nama: 15 Oktober 2000</p>
+                  <p>Alamat: Semurup</p>
+               </div>
+            </div>
+
+            <div class="card">
+               <h4>Biodata 1</h4>
+               <div class="card-body">
+                  <p>Nama: Hikma Nelda</p>
+                  <p>Tempat Lahir: Semurup</p>
+                  <p>Nama: 15 Oktober 2000</p>
+                  <p>Alamat: Semurup</p>
+               </div>
+            </div>
+         </div>
+        <!-- <ul>
+          <% biodata.forEach(function(data) { %>
+            <li>Name:<%= data.name %></li>
+          <% }); %>
+        </ul> -->
+      </div>
+    </div>
+  </body>
+</html>
