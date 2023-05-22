@@ -95,7 +95,7 @@
       });
 
       const submitForm = async (id) => {
-         await fetch(`http://localhost:5000/api/views/biodata/${id}`, {
+         await fetch(`/api/views/biodata/${id}`, {
             method: 'PUT',
             headers: {
                'Content-Type': 'application/json'
@@ -107,7 +107,7 @@
                address,
             })
          });
-         window.location = 'http://localhost:5000/api/views/biodata';
+         window.location = '/api/views/biodata';
       }
     </script>
   </body>

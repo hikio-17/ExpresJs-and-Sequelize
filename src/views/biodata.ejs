@@ -11,7 +11,7 @@
     <div class="main-content">
       <div class="login-box">
         <p>Biodata</p>
-        <form action="http://localhost:5000/api/views/biodata" method="POST">
+        <form action="/api/views/biodata" method="POST">
           <div class="user-box">
             <input
               required=""
@@ -106,7 +106,7 @@
         const trueDelete = confirm(`Apakah anda yakin ingin menghapus biodata dengan id ${id}`)
          
         if(trueDelete) {
-          await fetch(`http://localhost:5000/api/views/biodata/${id}`, {
+          await fetch(`/api/views/biodata/${id}`, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -117,7 +117,7 @@
       }
 
       const editBiodataById = (id) => {
-        window.location = `http://localhost:5000/api/views/biodata/${id}`
+        window.location = `/api/views/biodata/${id}`
       }
     </script>
   </body>
