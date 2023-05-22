@@ -24,9 +24,9 @@ exports.create = async (req, res) => {
       address,
     };
     // Save Biodata to database
-    const newBiodata = await Biodata.create(biodata);
+    await Biodata.create(biodata);
 
-    res.status(201).send(newBiodata);
+    res.status(201).redirect('/api/views/biodata');
   } catch (err) {
     res.status(500).send({
       message: 'Error occured while inserting biodata.',
@@ -66,7 +66,9 @@ exports.findOne = async (req, res) => {
       return;
     }
 
-    res.send(biodata);
+    res.render('editBiodata', {
+      biodata,
+    });
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -77,18 +79,8 @@ exports.findOne = async (req, res) => {
 // Update a single Biodata with an id
 exports.edit = async (req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   try {
-    const {
-      name, place_birth, date_birth, address,
-    } = req.body;
-
-    const newBiodata = {
-      name,
-      place_birth,
-      date_birth,
-      address,
-    };
-
     // check the biodata is in the database or not
     const biodata = await Biodata.findOne({
       where: {
@@ -103,6 +95,11 @@ exports.edit = async (req, res) => {
       return;
     }
 
+    const newBiodata = {
+      ...biodata,
+      ...req.body,
+    };
+
     // if there is a biodata update
     await Biodata.update(newBiodata, {
       where: {
@@ -110,9 +107,7 @@ exports.edit = async (req, res) => {
       },
     });
 
-    res.send({
-      message: 'Success update your biodata!',
-    });
+    res.send('success');
   } catch (err) {
     res.status(500).send({
       message: err.message,
@@ -145,9 +140,7 @@ exports.destroy = async (req, res) => {
       },
     });
 
-    res.send({
-      message: `Success delete biodata with id ${id}!`,
-    });
+    res.status(200).redirect('/api/views/biodata');
   } catch (err) {
     res.status(500).send({
       message: err.message,

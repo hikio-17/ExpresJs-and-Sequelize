@@ -11,11 +11,11 @@
     <div class="main-content">
       <div class="login-box">
         <p>Biodata</p>
-        <form action="http://localhost:8080/api/views/biodata" method="POST">
+        <form action="http://localhost:5000/api/views/biodata" method="POST">
           <div class="user-box">
             <input
               required=""
-              name="nama"
+              name="name"
               type="text"
               oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')"
               oninput="this.setCustomValidity('')"
@@ -25,7 +25,7 @@
           <div class="user-box">
             <input
               required=""
-              name="tmpLahir"
+              name="place_birth"
               type="text"
               oninvalid="this.setCustomValidity('Tempat Lahir Tidak Boleh Kosong.')"
               oninput="this.setCustomValidity('')"
@@ -35,7 +35,8 @@
           <div class="user-box">
             <input
               required=""
-              name="tglLahir"
+              name="date_birth"
+              placeholder="yyyy-mm-dd"
               type="text"
               oninvalid="this.setCustomValidity('Tangal Lahir Tidak Boleh Kosong.')"
               oninput="this.setCustomValidity('')"
@@ -45,7 +46,7 @@
           <div class="user-box">
             <input
               required=""
-              name="alamat"
+              name="address"
               type="text"
               oninvalid="this.setCustomValidity('Alamat tidak boleh kosong.')"
               oninput="this.setCustomValidity('')"
@@ -62,33 +63,62 @@
         </form>
       </div>
       <div class="list-biodata">
-         <div class="card-list">
-            <div class="card">
-               <h4>Biodata 1</h4>
-               <div class="card-body">
-                  <p>Nama: Hikma Nelda</p>
-                  <p>Tempat Lahir: Semurup</p>
-                  <p>Nama: 15 Oktober 2000</p>
-                  <p>Alamat: Semurup</p>
-               </div>
-            </div>
-
-            <div class="card">
-               <h4>Biodata 1</h4>
-               <div class="card-body">
-                  <p>Nama: Hikma Nelda</p>
-                  <p>Tempat Lahir: Semurup</p>
-                  <p>Nama: 15 Oktober 2000</p>
-                  <p>Alamat: Semurup</p>
-               </div>
-            </div>
-         </div>
-        <!-- <ul>
-          <% biodata.forEach(function(data) { %>
-            <li>Name:<%= data.name %></li>
-          <% }); %>
-        </ul> -->
+          <h3>List Biodata</h3>
+            <table border="3">
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Tempat Lahir</th>
+                <th>Tangal lahir</th>
+                <th>Alamat</th>
+                <th>Action</th>
+              </tr>
+              <tr>
+                <td>0</td>
+                <td>Fajri Muhammad Tio</td>
+                <td>sample</td>
+                <td>sample</td>
+                <td>sample</td>
+                <td class="action">
+                  <button class="edit">Edit</button>
+                  <button class="delete">Delete</button>
+                </td>
+              </tr>
+              <% biodata.forEach(function(data, i) { %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                    <td><%= data.name %></td>
+                    <td><%= data.place_birth %></td>
+                    <td><%= data.date_birth %></td>
+                    <td><%= data.address %></td>
+                    <td class="action">
+                      <button class="edit" onclick="editBiodataById(`<%= data.id %>`)" >Edit</button>
+                      <button class="delete" onclick="deleteBiodataById(`<%= data.id %>`)">Delete</button>
+                    </td>
+                </tr>
+              <% }); %>
+            </table>
       </div>
     </div>
+
+    <script>
+      const deleteBiodataById = async (id) => {
+        const trueDelete = confirm(`Apakah anda yakin ingin menghapus biodata dengan id ${id}`)
+         
+        if(trueDelete) {
+          await fetch(`http://localhost:5000/api/views/biodata/${id}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+          location.reload();
+        }
+      }
+
+      const editBiodataById = (id) => {
+        window.location = `http://localhost:5000/api/views/biodata/${id}`
+      }
+    </script>
   </body>
 </html>

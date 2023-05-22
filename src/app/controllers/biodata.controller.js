@@ -76,17 +76,6 @@ exports.findOne = async (req, res) => {
 exports.edit = async (req, res) => {
   const { id } = req.params;
   try {
-    const {
-      name, place_birth, date_birth, address,
-    } = req.body;
-
-    const newBiodata = {
-      name,
-      place_birth,
-      date_birth,
-      address,
-    };
-
     // check the biodata is in the database or not
     const biodata = await Biodata.findOne({
       where: {
@@ -100,6 +89,11 @@ exports.edit = async (req, res) => {
       });
       return;
     }
+
+    const newBiodata = {
+      ...biodata,
+      ...req.body,
+    };
 
     // if there is a biodata update
     await Biodata.update(newBiodata, {

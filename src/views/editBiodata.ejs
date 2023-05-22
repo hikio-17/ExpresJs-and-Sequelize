@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Biodata</title>
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+
+    <style>
+      .login-box {
+         margin: 0 auto;
+         margin-left: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main-content">
+      <div class="login-box">
+        <p>Biodata</p>
+        <form>
+          <div class="user-box">
+            <input
+              required=""
+              name="name"
+              id="name"
+              type="text"
+              value="<%= biodata.name %>"
+              oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Nama</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="place_birth"
+              id="place_birth"
+              type="text"
+              value="<%= biodata.place_birth %>"
+              oninvalid="this.setCustomValidity('Tempat Lahir Tidak Boleh Kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Tempat Lahir</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="date_birth"
+              id="date_birth"
+              type="text"
+              value="<%= biodata.date_birth %>"
+              oninvalid="this.setCustomValidity('Tangal Lahir Tidak Boleh Kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Tanggal Lahir</label>
+          </div>
+          <div class="user-box">
+            <input
+              required=""
+              name="address"
+              type="text"
+              id="address"
+              value="<%= biodata.address %>"
+              oninvalid="this.setCustomValidity('Alamat tidak boleh kosong.')"
+              oninput="this.setCustomValidity('')"
+            />
+            <label>Alamat</label>
+          </div>
+          <a href="#">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <button type="button" onclick="submitForm(`<%= biodata.id %>`)">Update Data</button>
+          </a>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      let name, place_birth, date_birth, address;
+
+      document.getElementById('name').addEventListener('change', function(e) {
+         name = e.target.value;
+      });
+      document.getElementById('place_birth').addEventListener('change', function(e) {
+         place_birth = e.target.value;
+      });
+      document.getElementById('date_birth').addEventListener('change', function(e) {
+         date_birth = e.target.value;
+      });
+      document.getElementById('address').addEventListener('change', function(e) {
+         address = e.target.value;
+      });
+
+      const submitForm = async (id) => {
+         await fetch(`http://localhost:5000/api/views/biodata/${id}`, {
+            method: 'PUT',
+            headers: {
+               'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+               name,
+               place_birth,
+               date_birth,
+               address,
+            })
+         });
+         window.location = 'http://localhost:5000/api/views/biodata';
+      }
+    </script>
+  </body>
+</html>

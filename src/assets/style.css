@@ -10,9 +10,59 @@
 }
 
 .main-content .list-biodata {
-  background-color: aqua;
+  background-color: #272727;
   width: 700px;
+  margin: 30px;
+  color: #fff;
+  border-radius: 15px;
 }
+
+table {
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+}
+
+table tr {
+  height: 40px;
+}
+
+table tr:hover {
+  background-color: #fff;
+  color: #272727;
+}
+
+.action button {
+  font-size: 12px;
+  letter-spacing: 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.action .edit {
+  border:1px solid yellowgreen;
+}
+
+.action .delete {
+  border:1px solid red;
+}
+
+.edit:hover {
+  background-color: yellowgreen;
+}
+
+.delete:hover {
+  background-color: red;
+}
+
+.list-biodata h3 {
+  text-align: center;
+  margin: 20px;
+  font-size: 32px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
 
 .login-box {
   position: absolute;
